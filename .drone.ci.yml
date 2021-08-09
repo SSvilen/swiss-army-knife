@@ -55,7 +55,7 @@ steps:
         from_secret: DOCKERHUB_USERNAME
       password:
         from_secret: DOCKERHUB_PASSWORD
-      repo: leodotcloud/swiss-army-knife
+      repo: svil/swiss-army-knife
       dockerfile: package/Dockerfile
       tags:
         - latest
