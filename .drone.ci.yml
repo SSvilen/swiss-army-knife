@@ -148,5 +148,5 @@ steps:
         - linux/amd64
         - linux/arm64
 depends_on:
-  - arm64 Image
-  - amd64 Image
+  - default-arm64
+  - default-amd64
