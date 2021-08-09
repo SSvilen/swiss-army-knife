@@ -14,8 +14,6 @@ platform:
 trigger:
   branch:
     - master
-  event:
-    - tag
 
 workspace:
   base: /go
@@ -49,7 +47,11 @@ steps:
     commands:
       - . ./version.env
       - ./scripts/build
-
+  - name: create tag
+    image: docker:git
+    commands:
+      - git fetch --tags
+      - echo -n "latest-linux-amd64,$(git describe --tags --abbrev=0)-linux-amd64" > .tags
   - name: publish
     image: plugins/docker
     settings:
@@ -59,15 +61,6 @@ steps:
         from_secret: DOCKERHUB_PASSWORD
       repo: svil/swiss-army-knife
       dockerfile: package/Dockerfile
-      tags:
-        - latest
-        - ${DRONE_TAG}
-    when:
-      branch:
-        - master
-      event:
-        - tag
-
 ---
 #
 # This file is used for running on CI server
@@ -85,8 +78,6 @@ platform:
 trigger:
   branch:
     - master
-  event:
-    - tag
 
 workspace:
   base: /go
@@ -120,6 +111,11 @@ steps:
     commands:
       - . ./version.env
       - ./scripts/build
+  - name: create tag
+    image: docker:git
+    commands:
+      - git fetch --tags
+      - echo -n "latest-linux-arm64,$(git describe --tags --abbrev=0)-linux-arm64" > .tags
 
   - name: publish
     image: plugins/docker
@@ -130,11 +126,6 @@ steps:
         from_secret: DOCKERHUB_PASSWORD
       repo: svil/swiss-army-knife
       dockerfile: package/Dockerfile
-      tags:
-        - latest
-        - ${DRONE_TAG}
     when:
       branch:
         - master
-      event:
-        - tag
