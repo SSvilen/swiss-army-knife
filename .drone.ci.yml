@@ -142,8 +142,8 @@ steps:
         from_secret: DOCKERHUB_USERNAME
       password:
         from_secret: DOCKERHUB_PASSWORD
-      target: svil//swiss-army-knife:latest
-      template: svil/loki-rule-operator:latest-OS-ARCH
+      target: svil/swiss-army-knife:latest
+      template: svil/swiss-army-knife:latest-OS-ARCH
       platforms:
         - linux/amd64
         - linux/arm64
