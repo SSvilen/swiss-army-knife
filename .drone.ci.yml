@@ -14,6 +14,8 @@ platform:
 trigger:
   branch:
     - master
+  event:
+    - tag
 
 workspace:
   base: /go
