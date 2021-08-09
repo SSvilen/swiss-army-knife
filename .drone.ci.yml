@@ -130,8 +130,6 @@ steps:
       branch:
         - master
 ---
-
----
 kind: pipeline
 type: docker
 name: push manifest
