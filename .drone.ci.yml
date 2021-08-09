@@ -129,3 +129,26 @@ steps:
     when:
       branch:
         - master
+---
+
+---
+kind: pipeline
+type: docker
+name: push manifest
+
+steps:
+  - name: manifest
+    image: plugins/manifest
+    settings:
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+      target: svil//swiss-army-knife:latest
+      template: svil/loki-rule-operator:latest-OS-ARCH
+      platforms:
+        - linux/amd64
+        - linux/arm64
+depends_on:
+  - arm64 Image
+  - amd64 Image
